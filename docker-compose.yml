@@ -5,6 +5,7 @@ services:
     container_name: 'my-gitlab'
     #if wee need on start and restart
     #restart: always
+    # for hostname in git snipets
     hostname: localhost
     environment:
       GITLAB_OMNIBUS_CONFIG: |

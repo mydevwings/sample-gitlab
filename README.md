@@ -1,39 +1,39 @@
 ##Sample gitlab
 
 
-Run it 
+### Создание 
+
 В директории с файлом **docker-compose.yml** 
 
 Создать скрипт:
 
-create_gitlab.sh
+**create_gitlab.sh**
 
 ```
 export GITLAB_HOME=/home/username/code/gitlab/data
 docker-compose up -d 
 ```
+
 Сделать скрипт выполняемым
 
-chmod +x create_gitlab.sh
 
-Пыполнить скрипт 
+```
+chmod +x create_gitlab.sh
+```
+
+Выполнить скрипт 
+
 ```
 sh create_gitlab.sh 
 ```
 
-### TODO 
-
-отключить автостарт для gitlab
-
-
-
-Подождать после некоторое время - gitlab может быть недоступен
+Подождать после некоторое время 2-5 минуты- gitlab настраивается
 
 
 По умолчанию localhost:9090
 
 При первом запуске - будут просить задать пароль.
-После задачи пароля - пользователь -  **admin@example.com**
+После задачи пароля - пользователь -  **admin@example.com** или **root**
 
 ### После - добавить своего пользователя
 
@@ -41,18 +41,17 @@ sh create_gitlab.sh
 http://localhost:9090/admin/users
 
 * CLick **new user** 
-* Fill fields in **Accout**
+* Fill the fields in a **Accout** section
 * Return to users. Then edit created user and provide password
 
-Login created user -change password if you need
+Login created user -change password
 
-
-* In snippet - for creating new project -  rename **hostname** to **localhost**
-And yours port **9090**
+* В docker-compose есть свойство **hostname**. Заполнить на свой нужный. Сейчас стоит **localhost** для запуска на своей машине локально.
+* В снипетах по созданию проекта - добавить порт **9090**
 
 from 
 ```
-git remote add origin http://hostname/mydevwings/test.git
+git remote add origin http://localhost/mydevwings/test.git
 ```
 
 to
@@ -61,7 +60,7 @@ to
 git remote add origin http://localhost:9090/mydevwings/test.git
 ```
 
-### In project 
+### В проекте - добавить пользователя для gitlab - эти настройки локально для проекта
 
 git config user.name "mydevwings" 
 git config user.email "mydevwings@gmail.com"
