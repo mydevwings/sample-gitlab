@@ -1,0 +1,25 @@
+version: "3.6" 
+services:
+  web:
+    image: 'gitlab/gitlab-ce'
+    container_name: 'my-gitlab'
+    #if wee need on start and restart
+    #restart: always
+    hostname: localhost
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        gitlab_rails['gitlab_shell_ssh_port'] = 8822
+        gitlab_rails['lfs_enabled'] = true
+    networks:
+      - gitlab-network
+    ports:
+      - '9090:80'
+      - '444:443'
+      - '8822:22'
+    volumes:
+      - '$GITLAB_HOME/config:/etc/gitlab'
+      - '$GITLAB_HOME/logs:/var/log/gitlab'
+      - '$GITLAB_HOME/data:/var/opt/gitlab'
+networks:
+  gitlab-network:
+    name: gitlab-network
